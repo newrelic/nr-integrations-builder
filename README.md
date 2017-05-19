@@ -44,3 +44,17 @@ community.  Before submitting a pull request please review
 
 Following these helps us efficiently review and incorporate your contribution
 and avoid breaking your code with future changes to the agent.
+
+## Support
+
+You can find more detailed documentation [on our website](http://newrelic.com/docs),
+and specifically in the [Infrastructure category](https://docs.newrelic.com/docs/infrastructure).
+
+If you can't find what you're looking for there, reach out to us on our [support
+site](http://support.newrelic.com/) or our [community forum](http://forum.newrelic.com)
+and we'll be happy to help you.
+
+Find a bug? Contact us via [support.newrelic.com](http://support.newrelic.com/),
+or email support@newrelic.com.
+
+New Relic, Inc.
