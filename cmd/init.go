@@ -53,7 +53,7 @@ var initCmd = &cobra.Command{
 func init() {
 	RootCmd.AddCommand(initCmd)
 
-	initCmd.PersistentFlags().StringVarP(&icompanyPrefix, "company_prefix", "c", "custom", "Company prefix identifier")
-	initCmd.PersistentFlags().StringVarP(&icompanyName, "company_name", "n", "custom", "Company name")
-	initCmd.PersistentFlags().StringVarP(&idestinationPath, "destination_path", "p", "./", "Destination path for initialized integration")
+	initCmd.PersistentFlags().StringVarP(&icompanyPrefix, "company-prefix", "c", "custom", "Company prefix identifier")
+	initCmd.PersistentFlags().StringVarP(&icompanyName, "company-name", "n", "custom", "Company name")
+	initCmd.PersistentFlags().StringVarP(&idestinationPath, "destination-path", "p", "./", "Destination path for initialized integration")
 }

@@ -22,9 +22,9 @@ Usage with options:
 
 ```bash
 $ nr-integrations-builder init \
-  --company_prefix "nr" \
-  --company_name "newrelic" \
-  --destination_path "~/Gocode/nr-integrations/" \
+  --company-prefix "nr" \
+  --company-name "newrelic" \
+  --destination-path "~/Gocode/nr-integrations/" \
   mysql
 ```
 
