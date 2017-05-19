@@ -36,10 +36,11 @@ To install, use `go get`:
 $ go get github.com/newrelic/nr-integrations-builder
 ```
 
-## Contribution
+## Contributing Code
 
-1. Create a feature branch
-1. Commit your changes
-1. Rebase your local changes against the master branch
-1. Run test suite with the `make test` command and confirm that it passes
-1. Create a new Pull Request
+We welcome code contributions (in the form of pull requests) from our user
+community.  Before submitting a pull request please review
+[these guidelines](https://github.com/newrelic/nr-integrations-builder/blob/master/CONTRIBUTING.md).
+
+Following these helps us efficiently review and incorporate your contribution
+and avoid breaking your code with future changes to the agent.
