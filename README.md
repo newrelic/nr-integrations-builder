@@ -3,6 +3,30 @@
 You can use this command-line tool to create and scaffold a new integration in
 Golang for [New Relic Integration Agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure).
 
+## Getting started
+
+### Prerequisites
+
+Both the CLI and generated integration have dependencies that require Go 1.8 or
+higher.
+
+Before starting to write Go code, we suggest taking a look at Golang's
+documentation to setup the environment and familiarize yourself with Golang
+language.
+
+### Installation
+
+To install the command-line tool, use `go get`:
+
+```bash
+$ go get github.com/newrelic/nr-integrations-builder
+```
+
+After this step, the binary of `nr-integrations-builder` should be installed in
+`$GOPATH/bin` or `$GOBIN` if this last one is set. In a common Golang workspace,
+it's recommended having `$GOPATH/bin` included in your `$PATH`. That way, you
+would have `nr-integrations-builder` available globally.
+
 ## Usage
 
 At this moment, there is only one command available: `init`. This is an example
@@ -26,14 +50,6 @@ $ nr-integrations-builder init \
   --company-name "newrelic" \
   --destination-path "~/Gocode/nr-integrations/" \
   mysql
-```
-
-## Install
-
-To install, use `go get`:
-
-```bash
-$ go get github.com/newrelic/nr-integrations-builder
 ```
 
 ## Contributing Code
