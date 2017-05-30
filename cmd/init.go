@@ -35,7 +35,7 @@ var initCmd = &cobra.Command{
 				Description:     fmt.Sprintf(descriptionTmpl, iname),
 				ProtocolVersion: defaultProtocolVersion,
 				OS:              defaultOS,
-				Prefix:          "service/" + iname,
+				Prefix:          "config/" + iname,
 				Interval:        defaultInterval,
 				CompanyPrefix:   icompanyPrefix,
 				CompanyName:     icompanyName,
