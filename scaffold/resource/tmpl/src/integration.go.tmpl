@@ -18,16 +18,16 @@ const (
 
 var args argumentList
 
-func populateInventory(inventory map[string]sdk.Inventory) error {
+func populateInventory(inventory sdk.Inventory) error {
 	// Insert here the logic of your integration to get the inventory data
-	//
+	// Ex: inventory.SetItem("softwareVersion", "value", "1.0.1")
 	// --
 	return nil
 }
 
 func populateMetrics(ms *metric.MetricSet) error {
 	// Insert here the logic of your integration to get the metrics data
-	// Ex: ms.AddMetric("requestsPerSecond", 10, metric.GAUGE)
+	// Ex: ms.SetMetric("requestsPerSecond", 10, metric.GAUGE)
 	// --
 	return nil
 }
@@ -44,7 +44,6 @@ func main() {
 		ms := integration.NewMetricSet("<REPLACE_WITH_YOUR_EVENT_TYPE>", "{{.Integration.Name}}")
 		fatalIfErr(populateMetrics(ms))
 	}
-
 	fatalIfErr(integration.Publish())
 }
 
