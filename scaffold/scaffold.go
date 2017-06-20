@@ -61,9 +61,22 @@ func (s *Scaffold) InitVendoring() error {
 	if err != nil {
 		return fmt.Errorf("cannot initialize the vendoring of dependencies. %s failed with: %s", "govendor init", output)
 	}
-	cmd = exec.Command("govendor", "fetch", "github.com/Sirupsen/logrus@v0.11.5")
-	//TODO: Add onhost-sdk
-	output, err = cmd.CombinedOutput()
+
+	var dependencyUrls = []string{"github.com/Sirupsen/logrus@v0.11.5", "github.com/newrelic/infra-integrations-sdk/...@v0.3.0"}
+
+	for _, url := range dependencyUrls {
+		err := fetchDependency(url)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func fetchDependency(url string) error {
+	cmd := exec.Command("govendor", "fetch", url)
+	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("cannot fetch external dependency. Failed with: %s", output)
 	}
