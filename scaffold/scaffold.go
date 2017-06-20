@@ -115,7 +115,7 @@ func createIntegrationFile(directoryPath string, tmpl template, integration Inte
 		return nil, fmt.Errorf("cannot create file '%s'. \"%s\"", outputFilePath, err)
 	}
 	// Change permissions
-	err = outputFile.Chmod(tmpl.FileMode)
+	err = os.Chmod(outputFilePath, tmpl.FileMode)
 	if err != nil {
 		return nil, fmt.Errorf("cannot change the permissions of '%s'. \"%s\"", outputFilePath, err)
 	}
