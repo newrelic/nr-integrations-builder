@@ -41,7 +41,7 @@ func main() {
 	}
 
 	if args.All || args.Metrics {
-		ms := integration.NewMetricSet("<REPLACE_WITH_YOUR_EVENT_TYPE>", "{{.Integration.Name}}")
+		ms := integration.NewMetricSet("{{.Integration.EventType}}")
 		fatalIfErr(populateMetrics(ms))
 	}
 	fatalIfErr(integration.Publish())

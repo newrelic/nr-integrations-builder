@@ -29,6 +29,7 @@ type Integration struct {
 	CompanyPrefix   string
 	CompanyName     string
 	BinaryName      string
+	EventType       string
 }
 
 type template struct {

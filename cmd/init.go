@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/newrelic/nr-integrations-builder/scaffold"
@@ -40,6 +41,7 @@ var initCmd = &cobra.Command{
 				CompanyPrefix:   icompanyPrefix,
 				CompanyName:     icompanyName,
 				BinaryName:      icompanyPrefix + "-" + iname,
+				EventType:       strings.Title(strings.ToLower(iname)) + "Sample",
 			},
 		}
 		err := s.Generate(verbose)
