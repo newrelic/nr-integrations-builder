@@ -14,6 +14,8 @@ Before starting to write Go code, we suggest taking a look at Golang's
 documentation to setup the environment and familiarize yourself with Golang
 language.
 
+It is required to install [the Vendor Tool for Go](https://github.com/kardianos/govendor), which is used for managing dependencies. The project that you will create must be within a `$GOPATH/src`, otherwise the Vendor Tool won't work properly.
+
 ### Installation
 
 To install the command-line tool, use `go get`:
@@ -46,9 +48,9 @@ Usage with options:
 
 ```bash
 $ nr-integrations-builder init \
-  --company-prefix "nr" \
-  --company-name "newrelic" \
-  --destination-path "~/Gocode/nr-integrations/" \
+  --company-name "your-company-name" \
+  --company-prefix "ycp" \
+  --destination-path "$GOPATH/src/custom-integrations/" \
   mysql
 ```
 
