@@ -7,9 +7,6 @@ Golang for [New Relic Integration Agent](https://docs.newrelic.com/docs/infrastr
 
 ### Prerequisites
 
-Both the CLI and generated integration have dependencies that require Go 1.8 or
-higher.
-
 Before starting to write Go code, we suggest taking a look at Golang's
 documentation to setup the environment and familiarize yourself with Golang
 language.
