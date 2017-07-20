@@ -63,7 +63,7 @@ func (s *Scaffold) InitVendoring() error {
 		return fmt.Errorf("cannot initialize the vendoring of dependencies. %s failed with: %s", "govendor init", output)
 	}
 
-	var dependencyUrls = []string{"github.com/Sirupsen/logrus@v0.11.5", "github.com/newrelic/infra-integrations-sdk/...@v0.4"}
+	var dependencyUrls = []string{"github.com/Sirupsen/logrus@v0.11.5", "github.com/newrelic/infra-integrations-sdk/...@v1.0"}
 
 	for _, url := range dependencyUrls {
 		err := fetchDependency(url)
