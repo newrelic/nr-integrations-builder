@@ -1,19 +1,11 @@
-## Unreleased
-### Added
+## 1.0.0 (2017-06-20)
+## Changed
 
-- Nothing
-
-### Deprecated
-
-- Nothing
-
-### Removed
-
-- Nothing
-
-### Fixed
-
-- Nothing
+- Update the dependency with infra-integrations-sdk to v1.0
+- Update integration templates with required changes for infra-integrations-sdk
+  v1.0
+- Update how we were composing the integration name in the scaffold template
+- Update README documentation
 
 ## 0.3.0 (2017-06-22)
 ### Changed
