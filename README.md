@@ -23,32 +23,32 @@ $ go get github.com/newrelic/nr-integrations-builder
 
 After this step, the binary of `nr-integrations-builder` should be installed in
 `$GOPATH/bin` or `$GOBIN` if this last one is set. In a common Golang workspace,
-it's recommended having `$GOPATH/bin` included in your `$PATH`. That way, you
+it's recommended having `$GOPATH/bin` or `$GOBIN` included in your `$PATH`. That way, you
 would have `nr-integrations-builder` available globally.
 
 ## Usage
 
-At this moment, there is only one command available: `init`. This is an example
-of the usage:
-
-```bash
-$ nr-integrations-builder init mysql
-```
-
-You can check the available options for this command using the `--help` option:
+At this moment, there is only one command available: `init`. You can check the available options for this command using the `--help` option:
 
 ```bash
 $ nr-integrations-builder init --help
 ```
+It's obligatory to specify `company-name` and `company-prefix` flags. Otherwise, the `nr-integrations-builder` will not initialize the integration.
 
-Usage with options:
+This is an example of the usage:
 
 ```bash
 $ nr-integrations-builder init \
-  --company-name "your-company-name" \
-  --company-prefix "ycp" \
-  --destination-path "$GOPATH/src/custom-integrations/" \
+  --company-name "myorganization" \
+  --company-prefix "myorg" \
+  --destination-path "$GOPATH/src/myorg-integrations/" \
   mysql
+```
+
+If you don't specify `destination-path` flag the current directory will be used.
+It is also possible to specify the flags in short form:
+```bash
+nr-integrations-builder init mysql -n "myorganization" -c "myorg"
 ```
 
 ## Contributing Code
