@@ -1,6 +1,6 @@
 VALIDATE_DEPS = github.com/golang/lint/golint
 TEST_DEPS     = github.com/axw/gocov/gocov github.com/AlekSi/gocov-xml
-DEPS          = github.com/kardianos/govendor github.com/jteeuwen/go-bindata/...
+DEPS          = github.com/jteeuwen/go-bindata/...
 GO_PKGS      := $(shell go list ./... | grep -v "/vendor/")
 GO_FILES     := $(shell find . -type f -name "*.go" | grep -v "/vendor/" | grep -v "bindata.go")
 
