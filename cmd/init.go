@@ -48,11 +48,8 @@ var initCmd = &cobra.Command{
 				EventType:       strings.Title(strings.ToLower(icompanyPrefix)) + strings.Title(strings.ToLower(iname)) + "Sample",
 			},
 		}
-		err := s.Generate(verbose)
-		if err != nil {
-			return err
-		}
-		return s.InitVendoring()
+
+		return s.Generate(verbose)
 	},
 }
 
