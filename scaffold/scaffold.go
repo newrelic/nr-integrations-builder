@@ -47,45 +47,26 @@ var templates = []template{
 	{"resource/tmpl/src/integration.go.tmpl", "src/{{ .Name }}.go", 0644},
 	{"resource/tmpl/src/integration_test.go.tmpl", "src/{{ .Name }}_test.go", 0644},
 	{"resource/tmpl/Makefile.tmpl", "Makefile", 0644},
+	{"resource/tmpl/vendor/vendor.json.tmpl", "vendor/vendor.json", 0644},
 }
 
 // InitVendoring setup the vendoring of the integration dependencies using
 // 'govendor' tool.
 func (s *Scaffold) InitVendoring() error {
-	fmt.Println("Vendoring external dependencies...")
-	err := os.Chdir(s.DestinationPath)
-	if err != nil {
-		return err
-	}
-	cmd := exec.Command("govendor", "init")
+	fmt.Println("Fetching external dependencies...")
+	cmd := exec.Command("make", "compile-deps")
+	cmd.Dir = s.DestinationPath
+
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("cannot initialize the vendoring of dependencies. %s failed with: %s", "govendor init", output)
+		return fmt.Errorf("cannot fetch external dependencies. %s failed with: %s", "make compile-deps", output)
 	}
 
-	var dependencyUrls = []string{"github.com/Sirupsen/logrus@v0.11.5", "github.com/newrelic/infra-integrations-sdk/...@v1.0"}
-
-	for _, url := range dependencyUrls {
-		err := fetchDependency(url)
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func fetchDependency(url string) error {
-	cmd := exec.Command("govendor", "fetch", url)
-	output, err := cmd.CombinedOutput()
-	if err != nil {
-		return fmt.Errorf("cannot fetch external dependency. Failed with: %s", output)
-	}
 	return nil
 }
 
 func createIntegrationDirectories(destinationPath string, verbose bool) error {
-	for _, path := range []string{destinationPath, destinationPath + "/src"} {
+	for _, path := range []string{destinationPath, destinationPath + "/src", destinationPath + "/vendor"} {
 		err := os.MkdirAll(path, os.ModePerm)
 		if err != nil {
 			return fmt.Errorf("cannot create directory '%s': \"%s\"", path, err)
