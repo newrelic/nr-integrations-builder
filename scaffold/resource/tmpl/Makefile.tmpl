@@ -3,6 +3,7 @@ BINARY_NAME   = {{.Integration.CompanyPrefix}}-$(INTEGRATION)
 GO_PKGS      := $(shell go list ./... | grep -v "/vendor/")
 GO_FILES     := $(shell find src -type f -name "*.go")
 VALIDATE_DEPS = github.com/golang/lint/golint
+DEPS          = github.com/kardianos/govendor
 TEST_DEPS     = github.com/axw/gocov/gocov github.com/AlekSi/gocov-xml
 
 all: build
@@ -52,7 +53,8 @@ validate: validate-deps validate-only
 
 compile-deps:
 	@echo "=== $(INTEGRATION) === [ compile-deps ]: installing build dependencies..."
-	@go get -v -d -t ./...
+	@go get $(DEPS)
+	@govendor sync
 
 compile-only:
 	@echo "=== $(INTEGRATION) === [ compile ]: building $(BINARY_NAME)..."
