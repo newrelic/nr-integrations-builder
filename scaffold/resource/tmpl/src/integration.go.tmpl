@@ -32,6 +32,13 @@ func populateMetrics(ms *metric.MetricSet) error {
 	return nil
 }
 
+func populateEvents(i *sdk.Integration) error {
+	// Insert here the logic of your integration to populate event data
+	// Ex: i.AddEvent("Service restarted", "notification")
+	// --
+	return nil
+}
+
 func main() {
 	integration, err := sdk.NewIntegration(integrationName, integrationVersion, &args)
 	fatalIfErr(err)
@@ -43,6 +50,11 @@ func main() {
 	if args.All || args.Metrics {
 		ms := integration.NewMetricSet("{{.Integration.EventType}}")
 		fatalIfErr(populateMetrics(ms))
+
+		err := populateEvents(integration)
+		if err != nil {
+			log.Debug("adding event failed, got: %s", err)
+		}
 	}
 	fatalIfErr(integration.Publish())
 }
