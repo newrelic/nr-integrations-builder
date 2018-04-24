@@ -38,17 +38,22 @@ type template struct {
 	FileMode   os.FileMode
 }
 
-var templates = []template{
-	{"resource/tmpl/README.md.tmpl", "README.md", 0644},
-	{"resource/tmpl/CHANGELOG.md.tmpl", "CHANGELOG.md", 0644},
-	{"resource/tmpl/LICENSE.tmpl", "LICENSE", 0644},
-	{"resource/tmpl/definition.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-definition.yml", 0644},
-	{"resource/tmpl/configuration.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-config.yml.sample", 0644},
-	{"resource/tmpl/src/integration.go.tmpl", "src/{{ .Name }}.go", 0644},
-	{"resource/tmpl/src/integration_test.go.tmpl", "src/{{ .Name }}_test.go", 0644},
-	{"resource/tmpl/Makefile.tmpl", "Makefile", 0644},
-	{"resource/tmpl/vendor/vendor.json.tmpl", "vendor/vendor.json", 0644},
-}
+var (
+	gometalinterPath = "resource/tmpl/.gometalinter.json.tmpl"
+
+	templates = []template{
+		{"resource/tmpl/README.md.tmpl", "README.md", 0644},
+		{"resource/tmpl/CHANGELOG.md.tmpl", "CHANGELOG.md", 0644},
+		{"resource/tmpl/LICENSE.tmpl", "LICENSE", 0644},
+		{"resource/tmpl/definition.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-definition.yml", 0644},
+		{"resource/tmpl/configuration.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-config.yml.sample", 0644},
+		{"resource/tmpl/src/integration.go.tmpl", "src/{{ .Name }}.go", 0644},
+		{"resource/tmpl/src/integration_test.go.tmpl", "src/{{ .Name }}_test.go", 0644},
+		{"resource/tmpl/Makefile.tmpl", "Makefile", 0644},
+		{ gometalinterPath,".gometalinter.json", 0644},
+		{"resource/tmpl/vendor/vendor.json.tmpl", "vendor/vendor.json", 0644},
+	}
+)
 
 // InitVendoring setup the vendoring of the integration dependencies using
 // 'govendor' tool.

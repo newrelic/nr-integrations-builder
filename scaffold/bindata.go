@@ -8,6 +8,7 @@
 // resource/tmpl/definition.yml.tmpl
 // resource/tmpl/src/integration.go.tmpl
 // resource/tmpl/src/integration_test.go.tmpl
+// resource/tmpl/.gometalinter.json.tmpl
 // resource/tmpl/vendor/vendor.json.tmpl
 // DO NOT EDIT!
 
@@ -245,6 +246,26 @@ func resourceTmplVendorVendorJsonTmplBytes() ([]byte, error) {
 	)
 }
 
+var _resourceTmplGometalinterJsonTmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\xaa\xe6\x52\x50\x50\x72\xcd\x4b\x4c\xca\x49\x55\xb2\x52\x88\x56\x4a\x49\x4d\x4c\x49\xce\x4f\x49\x55\xd2\x51\x50\x4a\x2d\x2a\x4a\xce\x48\x4d\xce\x06\xb1\xd3\xf3\xd3\x72\x4b\x20\x8c\x9c\xcc\x3c\x28\x2b\x33\xb7\x20\xbf\xa8\xa4\x58\x29\x56\x07\x64\x4a\x58\x6a\x5e\x4a\x7e\x91\x92\x95\x42\x49\x51\x69\x2a\x58\xc4\xb5\x22\x39\xa7\x34\x05\x62\xb0\x9e\x9e\xbe\x9e\x9e\x7e\x19\x44\x4d\x2c\x57\x2d\x17\x20\x00\x00\xff\xff\x4d\xab\xfc\x58\x7a\x00\x00\x00")
+
+func resourceTmplGometalinterJsonTmplBytes() ([]byte, error) {
+	return bindataRead(
+		_resourceTmplGometalinterJsonTmpl,
+		"resource/tmpl/.gometalinter.json.tmpl",
+	)
+}
+
+func resourceTmplGometalinterJsonTmpl() (*asset, error) {
+	bytes, err := resourceTmplGometalinterJsonTmplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "resource/tmpl/.gometalinter.json.tmpl", size: 1880, mode: os.FileMode(420), modTime: time.Unix(1515403721, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 func resourceTmplVendorVendorJsonTmpl() (*asset, error) {
 	bytes, err := resourceTmplVendorVendorJsonTmplBytes()
 	if err != nil {
@@ -316,6 +337,7 @@ var _bindata = map[string]func() (*asset, error){
 	"resource/tmpl/definition.yml.tmpl": resourceTmplDefinitionYmlTmpl,
 	"resource/tmpl/src/integration.go.tmpl": resourceTmplSrcIntegrationGoTmpl,
 	"resource/tmpl/src/integration_test.go.tmpl": resourceTmplSrcIntegration_testGoTmpl,
+	"resource/tmpl/.gometalinter.json.tmpl": resourceTmplGometalinterJsonTmpl,
 	"resource/tmpl/vendor/vendor.json.tmpl": resourceTmplVendorVendorJsonTmpl,
 }
 
