@@ -329,16 +329,16 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"resource/tmpl/CHANGELOG.md.tmpl": resourceTmplChangelogMdTmpl,
-	"resource/tmpl/LICENSE.tmpl": resourceTmplLicenseTmpl,
-	"resource/tmpl/Makefile.tmpl": resourceTmplMakefileTmpl,
-	"resource/tmpl/README.md.tmpl": resourceTmplReadmeMdTmpl,
-	"resource/tmpl/configuration.yml.tmpl": resourceTmplConfigurationYmlTmpl,
-	"resource/tmpl/definition.yml.tmpl": resourceTmplDefinitionYmlTmpl,
-	"resource/tmpl/src/integration.go.tmpl": resourceTmplSrcIntegrationGoTmpl,
+	"resource/tmpl/CHANGELOG.md.tmpl":            resourceTmplChangelogMdTmpl,
+	"resource/tmpl/LICENSE.tmpl":                 resourceTmplLicenseTmpl,
+	"resource/tmpl/Makefile.tmpl":                resourceTmplMakefileTmpl,
+	"resource/tmpl/README.md.tmpl":               resourceTmplReadmeMdTmpl,
+	"resource/tmpl/configuration.yml.tmpl":       resourceTmplConfigurationYmlTmpl,
+	"resource/tmpl/definition.yml.tmpl":          resourceTmplDefinitionYmlTmpl,
+	"resource/tmpl/src/integration.go.tmpl":      resourceTmplSrcIntegrationGoTmpl,
 	"resource/tmpl/src/integration_test.go.tmpl": resourceTmplSrcIntegration_testGoTmpl,
-	"resource/tmpl/.gometalinter.json.tmpl": resourceTmplGometalinterJsonTmpl,
-	"resource/tmpl/vendor/vendor.json.tmpl": resourceTmplVendorVendorJsonTmpl,
+	"resource/tmpl/.gometalinter.json.tmpl":      resourceTmplGometalinterJsonTmpl,
+	"resource/tmpl/vendor/vendor.json.tmpl":      resourceTmplVendorVendorJsonTmpl,
 }
 
 // AssetDir returns the file names below a certain
@@ -380,21 +380,22 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
-	"resource": &bintree{nil, map[string]*bintree{
-		"tmpl": &bintree{nil, map[string]*bintree{
-			"CHANGELOG.md.tmpl": &bintree{resourceTmplChangelogMdTmpl, map[string]*bintree{}},
-			"LICENSE.tmpl": &bintree{resourceTmplLicenseTmpl, map[string]*bintree{}},
-			"Makefile.tmpl": &bintree{resourceTmplMakefileTmpl, map[string]*bintree{}},
-			"README.md.tmpl": &bintree{resourceTmplReadmeMdTmpl, map[string]*bintree{}},
-			"configuration.yml.tmpl": &bintree{resourceTmplConfigurationYmlTmpl, map[string]*bintree{}},
-			"definition.yml.tmpl": &bintree{resourceTmplDefinitionYmlTmpl, map[string]*bintree{}},
-			"src": &bintree{nil, map[string]*bintree{
-				"integration.go.tmpl": &bintree{resourceTmplSrcIntegrationGoTmpl, map[string]*bintree{}},
-				"integration_test.go.tmpl": &bintree{resourceTmplSrcIntegration_testGoTmpl, map[string]*bintree{}},
+	"resource": {nil, map[string]*bintree{
+		"tmpl": {nil, map[string]*bintree{
+			"CHANGELOG.md.tmpl":      {resourceTmplChangelogMdTmpl, map[string]*bintree{}},
+			"LICENSE.tmpl":           {resourceTmplLicenseTmpl, map[string]*bintree{}},
+			"Makefile.tmpl":          {resourceTmplMakefileTmpl, map[string]*bintree{}},
+			"README.md.tmpl":         {resourceTmplReadmeMdTmpl, map[string]*bintree{}},
+			"configuration.yml.tmpl": {resourceTmplConfigurationYmlTmpl, map[string]*bintree{}},
+			"definition.yml.tmpl":    {resourceTmplDefinitionYmlTmpl, map[string]*bintree{}},
+			"src": {nil, map[string]*bintree{
+				"integration.go.tmpl":      {resourceTmplSrcIntegrationGoTmpl, map[string]*bintree{}},
+				"integration_test.go.tmpl": {resourceTmplSrcIntegration_testGoTmpl, map[string]*bintree{}},
 			}},
-			"vendor": &bintree{nil, map[string]*bintree{
-				"vendor.json.tmpl": &bintree{resourceTmplVendorVendorJsonTmpl, map[string]*bintree{}},
+			"vendor": {nil, map[string]*bintree{
+				"vendor.json.tmpl": {resourceTmplVendorVendorJsonTmpl, map[string]*bintree{}},
 			}},
 		}},
 	}},
@@ -446,4 +447,3 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-
