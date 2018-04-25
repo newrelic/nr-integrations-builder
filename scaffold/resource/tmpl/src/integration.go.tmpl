@@ -2,9 +2,8 @@ package main
 
 import (
 	sdkArgs "github.com/newrelic/infra-integrations-sdk/args"
-	"github.com/newrelic/infra-integrations-sdk/log"
-	"github.com/newrelic/infra-integrations-sdk/metric"
-	"github.com/newrelic/infra-integrations-sdk/sdk"
+    "github.com/newrelic/infra-integrations-sdk/integration"
+    "github.com/newrelic/infra-integrations-sdk/metric"
 )
 
 type argumentList struct {
@@ -18,37 +17,43 @@ const (
 
 var args argumentList
 
-func populateInventory(inventory sdk.Inventory) error {
-	// Insert here the logic of your integration to get the inventory data
-	// Ex: inventory.SetItem("softwareVersion", "value", "1.0.1")
-	// --
-	return nil
+func entityWithInventoryAndEvents(i *integration.Integration) {
+	// Create Entity
+	e,err := i.Entity("foo", "bar")
+	panicOnErr(err)
+
+	// Add an Event example
+	e.AddEvent(metric.NewEvent("foo","bar"))
+
+	// Add Inventory item Example
+	e.AddInventory("foo", "bar", "baz")
+
 }
 
-func populateMetrics(ms *metric.MetricSet) error {
-	// Insert here the logic of your integration to get the metrics data
-	// Ex: ms.SetMetric("requestsPerSecond", 10, metric.GAUGE)
-	// --
-	return nil
+
+func entityWithMetrics(i *integration.Integration) {
+	// Create Entity
+	e,err := i.Entity("baz", "qux")
+	panicOnErr(err)
+
+	// Add Metric example
+	m, err := e.NewMetricSet("foo")
+	m.SetMetric("foo", "bar", metric.ATTRIBUTE)
+
 }
 
 func main() {
-	integration, err := sdk.NewIntegration(integrationName, integrationVersion, &args)
-	fatalIfErr(err)
+		i, err := integration.NewWithArgs(integrationName, integrationVersion, &args)
+    	panicOnErr(err)
 
-	if args.All || args.Inventory {
-		fatalIfErr(populateInventory(integration.Inventory))
-	}
+    	entityWithInventoryAndEvents(i)
+    	entityWithMetrics(i)
 
-	if args.All || args.Metrics {
-		ms := integration.NewMetricSet("{{.Integration.EventType}}")
-		fatalIfErr(populateMetrics(ms))
-	}
-	fatalIfErr(integration.Publish())
+    	panicOnErr(i.Publish())
 }
 
-func fatalIfErr(err error) {
+func panicOnErr(err error) {
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
