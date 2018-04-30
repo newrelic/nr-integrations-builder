@@ -16,7 +16,7 @@ func TestEvent(t *testing.T) {
 	i, err := integration.New("test", "1.0.0")
 	assert.NoError(t, err)
 
-	e, err := i.Entity("testEntity", "testType")
+	e, err := i.Entity("testEntity", "testNamespace")
 	assert.NoError(t, err)
 
 	e.AddEvent(event.New("testSummary", "testCategory"))
@@ -33,7 +33,7 @@ func TestMetrics(t *testing.T) {
 	i, err := integration.New("test", "1.0.0")
 	assert.NoError(t, err)
 
-	e, err := i.Entity("testEntity", "testType")
+	e, err := i.Entity("testEntity", "testNamespace")
 	assert.NoError(t, err)
 
 	m, err := e.NewMetricSet("testMetrics")
@@ -63,13 +63,13 @@ func TestCreateRemoteEntity(t *testing.T) {
 	i, err := integration.New("test", "1.0.0")
 	assert.NoError(t, err)
 
-	e, err := i.Entity("testEntity", "testType")
+	e, err := i.Entity("testEntity", "testNamespace")
 	assert.Equal(t, "testEntity", e.Metadata.Name)
-	assert.Equal(t, "testType", e.Metadata.Type)
+	assert.Equal(t, "testNamespace", e.Metadata.Namespace)
 
 	j, err := json.Marshal(i)
 
-	assert.Equal(t, `{"name":"test","protocol_version":"2","integration_version":"1.0.0","data":[{"entity":{"name":"testEntity","type":"testType"},"metrics":[],"inventory":{},"events":[]}]}`, string(j))
+	assert.Equal(t, `{"name":"test","protocol_version":"2","integration_version":"1.0.0","data":[{"entity":{"name":"testEntity","type":"testNamespace"},"metrics":[],"inventory":{},"events":[]}]}`, string(j))
 
 }
 
