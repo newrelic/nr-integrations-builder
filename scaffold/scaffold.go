@@ -50,7 +50,7 @@ var (
 		{"resource/tmpl/src/integration.go.tmpl", "src/{{ .Name }}.go", 0644},
 		{"resource/tmpl/src/integration_test.go.tmpl", "src/{{ .Name }}_test.go", 0644},
 		{"resource/tmpl/Makefile.tmpl", "Makefile", 0644},
-		{ gometalinterPath,".gometalinter.json", 0644},
+		{gometalinterPath, ".gometalinter.json", 0644},
 		{"resource/tmpl/vendor/vendor.json.tmpl", "vendor/vendor.json", 0644},
 	}
 )

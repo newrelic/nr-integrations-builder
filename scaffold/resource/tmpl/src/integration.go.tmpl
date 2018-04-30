@@ -2,8 +2,9 @@ package main
 
 import (
 	sdkArgs "github.com/newrelic/infra-integrations-sdk/args"
-    "github.com/newrelic/infra-integrations-sdk/integration"
-    "github.com/newrelic/infra-integrations-sdk/metric"
+	"github.com/newrelic/infra-integrations-sdk/data/event"
+	"github.com/newrelic/infra-integrations-sdk/data/metric"
+	"github.com/newrelic/infra-integrations-sdk/integration"
 )
 
 type argumentList struct {
@@ -17,39 +18,54 @@ const (
 
 var args argumentList
 
-func entityWithInventoryAndEvents(i *integration.Integration) {
+func integrationWithRemoteEntities(i *integration.Integration) {
+
 	// Create Entity
-	e,err := i.Entity("foo", "bar")
+	e, err := i.Entity("redis-server", "cache")
 	panicOnErr(err)
 
 	// Add an Event example
-	e.AddEvent(metric.NewEvent("foo","bar"))
+	e.AddEvent(event.New("restart", "status"))
 
 	// Add Inventory item Example
-	e.AddInventory("foo", "bar", "baz")
+	e.SetInventoryItem("redis-server", "version", "3.0.1")
+
+	// Add Metric example
+	m, err := e.NewMetricSet("RedisServerSample")
+	m.SetMetric("keys", 4000, metric.GAUGE)
+	m.SetMetric("server-type", "slave", metric.ATTRIBUTE)
 
 }
 
+func integrationWithLocalEntity(i *integration.Integration) {
+	// This integration will show any data attached to the host where the agent is running
+	localEntity := i.LocalEntity()
+	localEntity.AddEvent(event.New("restart", "status"))
 
-func entityWithMetrics(i *integration.Integration) {
-	// Create Entity
-	e,err := i.Entity("baz", "qux")
-	panicOnErr(err)
+	// Add Inventory item Example
+	localEntity.SetInventoryItem("redis-server", "version", "3.0.1")
 
 	// Add Metric example
-	m, err := e.NewMetricSet("foo")
-	m.SetMetric("foo", "bar", metric.ATTRIBUTE)
+	m, err := localEntity.NewMetricSet("RedisServerSample")
+	panicOnErr(err)
 
+	m.SetMetric("keys", 4000, metric.GAUGE)
+	m.SetMetric("server-type", "master", metric.ATTRIBUTE)
 }
 
 func main() {
-		i, err := integration.NewWithArgs(integrationName, integrationVersion, &args)
-    	panicOnErr(err)
 
-    	entityWithInventoryAndEvents(i)
-    	entityWithMetrics(i)
+	remoteEntities := true
+	// Create Integration
+	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
+	panicOnErr(err)
 
-    	panicOnErr(i.Publish())
+	if remoteEntities {
+		integrationWithRemoteEntities(i)
+	} else {
+		integrationWithLocalEntity(i)
+	}
+	panicOnErr(i.Publish())
 }
 
 func panicOnErr(err error) {
