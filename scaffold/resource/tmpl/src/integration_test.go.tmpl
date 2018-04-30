@@ -36,7 +36,6 @@ func TestMetrics(t *testing.T) {
 	e, err := i.Entity("testEntity", "testType")
 	assert.NoError(t, err)
 
-	// Add Metric example
 	m, err := e.NewMetricSet("testMetrics")
 	assert.NoError(t, err)
 
