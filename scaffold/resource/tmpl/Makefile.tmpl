@@ -41,14 +41,6 @@ compile: deps
 	@echo "=== $(INTEGRATION) === [ compile ]: Building $(BINARY_NAME)..."
 	@go build -o bin/$(BINARY_NAME) ./src
 
-compile-dev: deps
-	@echo "=== $(INTEGRATION) === [ compile-dev ]: Building $(BINARY_NAME) for development environment..."
-	@GOOS=linux GOARCH=amd64 go build -o bin/$(BINARY_NAME) ./src
-
-deploy-dev: compile-dev
-	@echo "=== $(INTEGRATION) === [ deploy-dev ]: Deploying dev container image containing $(BINARY_NAME) in Kubernetes..."
-	@skaffold run
-
 test: deps
 	@echo "=== $(INTEGRATION) === [ test ]: Running unit tests..."
 	@gocov test $(GO_PKGS) | gocov-xml > coverage.xml
