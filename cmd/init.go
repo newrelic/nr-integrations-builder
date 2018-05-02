@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/newrelic/nr-integrations-builder/scaffold"
 	"github.com/spf13/cobra"
+	"gopkg.in/newrelic/nr-integrations-builder.v1/scaffold"
 )
 
 const (

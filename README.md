@@ -3,6 +3,10 @@
 You can use this command-line tool to create and scaffold a new integration in
 Golang for [New Relic Integration Agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure).
 
+This version uses the protocol version 1, so it only supports local entity.
+
+> If you need support for *remote entities* use the last builder version, which comes bundled with protocol version 2.
+
 ## Getting started
 
 ### Prerequisites
@@ -18,7 +22,7 @@ It is required to install [the Vendor Tool for Go](https://github.com/kardianos/
 To install the command-line tool, use `go get`:
 
 ```bash
-$ go get github.com/newrelic/nr-integrations-builder
+$ go get gopkg.in/newrelic/nr-integrations-builder.v1
 ```
 
 After this step, the binary of `nr-integrations-builder` should be installed in

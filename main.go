@@ -1,6 +1,6 @@
 package main
 
-import "github.com/newrelic/nr-integrations-builder/cmd"
+import "gopkg.in/newrelic/nr-integrations-builder.v1/cmd"
 
 func main() {
 	cmd.Execute()
