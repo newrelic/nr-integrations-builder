@@ -16,3 +16,8 @@ commands:
       - --inventory
     prefix: {{ .Integration.Prefix }}
     interval: {{ .Integration.Interval }}
+  events:
+    command:
+    - ./bin/{{ .Integration.BinaryName }}
+    - --events
+    interval: {{ .Integration.Interval }}
