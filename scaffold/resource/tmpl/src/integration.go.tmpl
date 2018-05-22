@@ -41,41 +41,59 @@ func integrationWithRemoteEntities(i *integration.Integration) {
 	e1, err := i.Entity("instance-1", "custom")
 	panicOnErr(err)
 
-	// Add an Event
-	e1.AddEvent(event.New("restart", "status"))
+	// Add Event
+	if args.All || args.Events {
+		e1.AddEvent(event.New("restart", "status"))
+	}
 
 	// Add Inventory item
-	e1.SetInventoryItem("instance", "version", "3.0.1")
+	if args.All || args.Inventory {
+		e1.SetInventoryItem("instance", "version", "3.0.1")
+	}
 
 	// Add Metric
-	m1, err := e1.NewMetricSet("CustomSample")
-	panicOnErr(err)
-	m1.SetMetric("some-data", 1000, metric.GAUGE)
+	if args.All || args.Metrics {
+		m1, err := e1.NewMetricSet("CustomSample")
+		panicOnErr(err)
+		m1.SetMetric("some-data", 1000, metric.GAUGE)
+	}
 
 	// Create another Entity
 	e2, err := i.Entity("instance-2", "custom")
 	panicOnErr(err)
 
-	e2.SetInventoryItem("instance", "version", "3.0.4")
+	if args.All || args.Inventory {
+		e2.SetInventoryItem("instance", "version", "3.0.4")
+	}
 
-	m2, err := e2.NewMetricSet("CustomSample")
-	panicOnErr(err)
-	m2.SetMetric("some-data", 2000, metric.GAUGE)
+	if args.All || args.Metrics {
+		m2, err := e2.NewMetricSet("CustomSample")
+		panicOnErr(err)
+		m2.SetMetric("some-data", 2000, metric.GAUGE)
+	}
 }
 
 // This integration will show any data attached to the host where the agent is running
 func integrationWithLocalEntity(i *integration.Integration) {
 	localEntity := i.LocalEntity()
-	localEntity.AddEvent(event.New("restart", "status"))
+
+	// Add Event
+	if args.All || args.Events {
+		localEntity.AddEvent(event.New("restart", "status"))
+	}
 
 	// Add Inventory item
-	localEntity.SetInventoryItem("instance", "version", "3.0.1")
+	if args.All || args.Inventory {
+		localEntity.SetInventoryItem("instance", "version", "3.0.1")
+	}
 
 	// Add Metric
-	m, err := localEntity.NewMetricSet("CustomSample")
-	panicOnErr(err)
+	if args.All || args.Metrics {
+		m, err := localEntity.NewMetricSet("CustomSample")
+		panicOnErr(err)
 
-	m.SetMetric("some-data", 4000, metric.GAUGE)
+		m.SetMetric("some-data", 4000, metric.GAUGE)
+	}
 }
 
 func panicOnErr(err error) {
