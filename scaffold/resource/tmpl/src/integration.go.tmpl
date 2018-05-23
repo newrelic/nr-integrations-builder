@@ -16,59 +16,12 @@ const (
 	integrationVersion = "0.1.0"
 )
 
-var args argumentList
-
-func integrationWithRemoteEntities(i *integration.Integration) {
-
-	// Create Entity, entities name must be unique
-	e1, err := i.Entity("redis-instance-1", "cache")
-	panicOnErr(err)
-
-	// Add an Event
-	e1.AddEvent(event.New("restart", "status"))
-
-	// Add Inventory item
-	e1.SetInventoryItem("redis-server", "version", "3.0.1")
-	e1.SetInventoryItem("connection", "type", "redis-slave1.example.com")
-
-	// Add Metric
-	m1, err := e1.NewMetricSet("RedisServerSample")
-	m1.SetMetric("keys", 1000, metric.GAUGE)
-	m1.SetMetric("server-type", "slave", metric.ATTRIBUTE)
-
-	// Create another Entity
-	e2, err := i.Entity("redis-instance-2", "cache")
-	panicOnErr(err)
-
-	e2.SetInventoryItem("redis-server", "version", "3.0.4")
-	e2.SetInventoryItem("connection", "type", "redis-slave2.example.com")
-
-	m2, err := e2.NewMetricSet("RedisServerSample")
-	m2.SetMetric("keys", 2000, metric.GAUGE)
-	m2.SetMetric("server-type", "slave", metric.ATTRIBUTE)
-
-}
-
-func integrationWithLocalEntity(i *integration.Integration) {
-	// This integration will show any data attached to the host where the agent is running
-	localEntity := i.LocalEntity()
-	localEntity.AddEvent(event.New("restart", "status"))
-
-	// Add Inventory item
-	localEntity.SetInventoryItem("redis-server", "version", "3.0.1")
-	localEntity.SetInventoryItem("connection", "type", "localhost")
-
-	// Add Metric
-	m, err := localEntity.NewMetricSet("RedisServerSample")
-	panicOnErr(err)
-
-	m.SetMetric("keys", 4000, metric.GAUGE)
-	m.SetMetric("server-type", "master", metric.ATTRIBUTE)
-}
+var (
+    args argumentList
+	remoteEntities = true // just as a sample
+)
 
 func main() {
-
-	remoteEntities := true
 	// Create Integration
 	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
 	panicOnErr(err)
@@ -78,7 +31,69 @@ func main() {
 	} else {
 		integrationWithLocalEntity(i)
 	}
+
 	panicOnErr(i.Publish())
+}
+
+// This integration will show data attached to their corresponding entities
+func integrationWithRemoteEntities(i *integration.Integration) {
+	// Create Entity, entities name must be unique
+	e1, err := i.Entity("instance-1", "custom")
+	panicOnErr(err)
+
+	// Add Event
+	if args.All || args.Events {
+		e1.AddEvent(event.New("restart", "status"))
+	}
+
+	// Add Inventory item
+	if args.All || args.Inventory {
+		e1.SetInventoryItem("instance", "version", "3.0.1")
+	}
+
+	// Add Metric
+	if args.All || args.Metrics {
+		m1, err := e1.NewMetricSet("CustomSample")
+		panicOnErr(err)
+		m1.SetMetric("some-data", 1000, metric.GAUGE)
+	}
+
+	// Create another Entity
+	e2, err := i.Entity("instance-2", "custom")
+	panicOnErr(err)
+
+	if args.All || args.Inventory {
+		e2.SetInventoryItem("instance", "version", "3.0.4")
+	}
+
+	if args.All || args.Metrics {
+		m2, err := e2.NewMetricSet("CustomSample")
+		panicOnErr(err)
+		m2.SetMetric("some-data", 2000, metric.GAUGE)
+	}
+}
+
+// This integration will show any data attached to the host where the agent is running
+func integrationWithLocalEntity(i *integration.Integration) {
+	localEntity := i.LocalEntity()
+
+	// Add Event
+	if args.All || args.Events {
+		localEntity.AddEvent(event.New("restart", "status"))
+	}
+
+	// Add Inventory item
+	if args.All || args.Inventory {
+		localEntity.SetInventoryItem("instance", "version", "3.0.1")
+	}
+
+	// Add Metric
+	if args.All || args.Metrics {
+		m, err := localEntity.NewMetricSet("CustomSample")
+		panicOnErr(err)
+
+		m.SetMetric("some-data", 4000, metric.GAUGE)
+	}
 }
 
 func panicOnErr(err error) {
