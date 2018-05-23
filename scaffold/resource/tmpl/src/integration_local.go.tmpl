@@ -1,0 +1,55 @@
+package main
+
+import (
+	sdkArgs "github.com/newrelic/infra-integrations-sdk/args"
+	"github.com/newrelic/infra-integrations-sdk/data/event"
+	"github.com/newrelic/infra-integrations-sdk/data/metric"
+	"github.com/newrelic/infra-integrations-sdk/integration"
+)
+
+type argumentList struct {
+	sdkArgs.DefaultArgumentList
+}
+
+const (
+	integrationName    = "com.{{.Integration.CompanyName}}.{{.Integration.Name}}"
+	integrationVersion = "0.1.0"
+)
+
+var (
+    args argumentList
+)
+
+func main() {
+	// Create Integration
+	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
+	panicOnErr(err)
+
+    entity := i.LocalEntity()
+
+    // Add Event
+    if args.All || args.Events {
+        localEntity.AddEvent(event.New("restart", "status"))
+    }
+
+    // Add Inventory item
+    if args.All || args.Inventory {
+        localEntity.SetInventoryItem("instance", "version", "3.0.1")
+    }
+
+    // Add Metric
+    if args.All || args.Metrics {
+        m, err := localEntity.NewMetricSet("CustomSample")
+        panicOnErr(err)
+
+        m.SetMetric("some-data", 4000, metric.GAUGE)
+    }
+
+	panicOnErr(i.Publish())
+}
+
+func panicOnErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}

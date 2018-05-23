@@ -18,7 +18,7 @@ const (
 	descriptionTmpl        = "Reports status and metrics for %s service"
 )
 
-var iname, idestinationPath, icompanyName, icompanyPrefix string
+var iname, idestinationPath, icompanyName, icompanyPrefix, entityType string
 
 var initCmd = &cobra.Command{
 	Use:   "init [integration name]",
@@ -28,7 +28,7 @@ var initCmd = &cobra.Command{
 		if len(args) < 1 {
 			return fmt.Errorf("An integration name is mandatory")
 		}
-		return checkRequiredFlags(cmd.Flags())
+		return checkFlags(cmd.Flags())
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		iname = args[0]
@@ -46,6 +46,7 @@ var initCmd = &cobra.Command{
 				CompanyName:     icompanyName,
 				BinaryName:      icompanyPrefix + "-" + iname,
 				EventType:       strings.Title(strings.ToLower(icompanyPrefix)) + strings.Title(strings.ToLower(iname)) + "Sample",
+				EntityType:      entityType,
 			},
 		}
 		err := s.Generate(verbose)
@@ -54,6 +55,21 @@ var initCmd = &cobra.Command{
 		}
 		return s.InitVendoring()
 	},
+}
+
+func checkFlags(flags *pflag.FlagSet) error {
+
+	eType, err := flags.GetString("entity-type")
+	if err != nil {
+		return err
+	}
+	if eType != "" && eType != "local" && eType != "remote" {
+		return fmt.Errorf("Wrong entity-type argument, valid values are: [remote, local]")
+	}
+
+	checkRequiredFlags(flags)
+
+	return nil
 }
 
 func checkRequiredFlags(flags *pflag.FlagSet) error {
@@ -87,4 +103,5 @@ func init() {
 	initCmd.PersistentFlags().StringVarP(&icompanyName, "company-name", "n", "", "Company name (required)")
 	initCmd.MarkPersistentFlagRequired("company-name")
 	initCmd.PersistentFlags().StringVarP(&idestinationPath, "destination-path", "p", "./", "Destination path for initialized integration")
+	initCmd.PersistentFlags().StringVarP(&entityType, "entity-type", "e", "remote", "Type of entity to generate: [remote,local] (required)")
 }
