@@ -60,6 +60,8 @@ community.  Before submitting a pull request please review
 Following these helps us efficiently review and incorporate your contribution
 and avoid breaking your code with future changes to the agent.
 
+IMPORTANT: Never edit manually the `scaffold/bindata.go file`. This must be generated using `make generate`
+
 ## Support
 
 You can find more detailed documentation [on our website](http://newrelic.com/docs),
