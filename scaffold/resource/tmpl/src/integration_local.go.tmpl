@@ -17,7 +17,7 @@ const (
 )
 
 var (
-    args argumentList
+	args argumentList
 )
 
 func main() {
@@ -25,25 +25,25 @@ func main() {
 	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
 	panicOnErr(err)
 
-    entity := i.LocalEntity()
+	entity := i.LocalEntity()
 
-    // Add Event
-    if args.All || args.Events {
-        localEntity.AddEvent(event.New("restart", "status"))
-    }
+	// Add Event
+	if args.All || args.Events {
+		entity.AddEvent(event.New("restart", "status"))
+	}
 
-    // Add Inventory item
-    if args.All || args.Inventory {
-        localEntity.SetInventoryItem("instance", "version", "3.0.1")
-    }
+	// Add Inventory item
+	if args.All || args.Inventory {
+		entity.SetInventoryItem("instance", "version", "3.0.1")
+	}
 
-    // Add Metric
-    if args.All || args.Metrics {
-        m, err := localEntity.NewMetricSet("CustomSample")
-        panicOnErr(err)
+	// Add Metric
+	if args.All || args.Metrics {
+		m, err := entity.NewMetricSet("CustomSample")
+		panicOnErr(err)
 
-        m.SetMetric("some-data", 4000, metric.GAUGE)
-    }
+		m.SetMetric("some-data", 4000, metric.GAUGE)
+	}
 
 	panicOnErr(i.Publish())
 }
