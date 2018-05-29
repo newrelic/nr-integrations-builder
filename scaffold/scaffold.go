@@ -66,7 +66,7 @@ var (
 // 'govendor' tool.
 func (s *Scaffold) InitVendoring() error {
 	fmt.Println("Fetching external dependencies...")
-	cmd := exec.Command("make", "compile-deps")
+	cmd := exec.Command("make", "compile")
 	cmd.Dir = s.DestinationPath
 
 	output, err := cmd.CombinedOutput()
