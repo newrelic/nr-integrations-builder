@@ -9,5 +9,5 @@ ADD {{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}-definition.yml /var
 #config file
 ADD {{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}-config.yml /etc/newrelic-infra/integrations.d/
 # binary file
-ADD bin/{{ .Integration.CompanyPrefix }}-{{ .Integration.Name }} /usr/local/bin/{{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}
+ADD bin/{{ .Integration.CompanyPrefix }}-{{ .Integration.Name }} /var/db/newrelic-infra/newrelic-integrations/bin/{{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}
 
