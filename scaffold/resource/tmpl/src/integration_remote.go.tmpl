@@ -31,7 +31,7 @@ func main() {
 
 	// Add Event
 	if args.All || args.Events {
-		e1.AddEvent(event.New("restart", "status"))
+		err = e1.AddEvent(event.New("restart", "status"))
 		panicOnErr(err)
 	}
 
@@ -58,7 +58,7 @@ func main() {
 	if args.All || args.Metrics {
 		m2, err := e2.NewMetricSet("CustomSample")
 		panicOnErr(err)
-		m2.SetMetric("some-data", 2000, metric.GAUGE)
+		err = m2.SetMetric("some-data", 2000, metric.GAUGE)
 		panicOnErr(err)
 	}
 
