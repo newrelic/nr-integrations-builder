@@ -30,6 +30,7 @@ type Integration struct {
 	CompanyName     string
 	BinaryName      string
 	EventType       string
+	EntityType      string
 }
 
 type template struct {
@@ -41,17 +42,23 @@ type template struct {
 var (
 	gometalinterPath = "resource/tmpl/.gometalinter.json.tmpl"
 
-	templates = []template{
+	commonTemplates = []template{
 		{"resource/tmpl/README.md.tmpl", "README.md", 0644},
 		{"resource/tmpl/CHANGELOG.md.tmpl", "CHANGELOG.md", 0644},
 		{"resource/tmpl/LICENSE.tmpl", "LICENSE", 0644},
 		{"resource/tmpl/definition.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-definition.yml", 0644},
 		{"resource/tmpl/configuration.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-config.yml.sample", 0644},
-		{"resource/tmpl/src/integration.go.tmpl", "src/{{ .Name }}.go", 0644},
-		{"resource/tmpl/src/integration_test.go.tmpl", "src/{{ .Name }}_test.go", 0644},
 		{"resource/tmpl/Makefile.tmpl", "Makefile", 0644},
 		{gometalinterPath, ".gometalinter.json", 0644},
 		{"resource/tmpl/vendor/vendor.json.tmpl", "vendor/vendor.json", 0644},
+	}
+	localTemplates = []template{
+		{"resource/tmpl/src/integration_local.go.tmpl", "src/{{ .Name }}.go", 0644},
+		{"resource/tmpl/src/integration_test_local.go.tmpl", "src/{{ .Name }}_test.go", 0644},
+	}
+	remoteTemplates = []template{
+		{"resource/tmpl/src/integration_remote.go.tmpl", "src/{{ .Name }}.go", 0644},
+		{"resource/tmpl/src/integration_test_remote.go.tmpl", "src/{{ .Name }}_test.go", 0644},
 	}
 )
 
@@ -59,7 +66,7 @@ var (
 // 'govendor' tool.
 func (s *Scaffold) InitVendoring() error {
 	fmt.Println("Fetching external dependencies...")
-	cmd := exec.Command("make", "compile-deps")
+	cmd := exec.Command("make", "compile")
 	cmd.Dir = s.DestinationPath
 
 	output, err := cmd.CombinedOutput()
@@ -141,6 +148,30 @@ func (s *Scaffold) Generate(verbose bool) error {
 	if err != nil {
 		return err
 	}
+
+	if s.Integration.EntityType == "remote" {
+		err = writeTemplates(remoteTemplates, s, verbose)
+		if err != nil {
+			return err
+		}
+	} else if s.Integration.EntityType == "local" {
+		err = writeTemplates(localTemplates, s, verbose)
+		if err != nil {
+			return err
+		}
+	}
+
+	err = writeTemplates(commonTemplates, s, verbose)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("Integration scaffold successfully created in '%s/'\n", s.DestinationPath)
+	return nil
+}
+
+// write templates
+func writeTemplates(templates []template, s *Scaffold, verbose bool) error {
 	for _, tmpl := range templates {
 		outputFile, err := createIntegrationFile(s.DestinationPath, tmpl, s.Integration, verbose)
 		if err != nil {
@@ -151,7 +182,6 @@ func (s *Scaffold) Generate(verbose bool) error {
 			return err
 		}
 	}
-	fmt.Printf("Integration scaffold successfully created in '%s/'\n", s.DestinationPath)
 	return nil
 }
 

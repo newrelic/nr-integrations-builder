@@ -17,8 +17,7 @@ const (
 )
 
 var (
-    args argumentList
-	remoteEntities = true // just as a sample
+	args argumentList
 )
 
 func main() {
@@ -26,17 +25,6 @@ func main() {
 	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
 	panicOnErr(err)
 
-	if remoteEntities {
-		integrationWithRemoteEntities(i)
-	} else {
-		integrationWithLocalEntity(i)
-	}
-
-	panicOnErr(i.Publish())
-}
-
-// This integration will show data attached to their corresponding entities
-func integrationWithRemoteEntities(i *integration.Integration) {
 	// Create Entity, entities name must be unique
 	e1, err := i.Entity("instance-1", "custom")
 	panicOnErr(err)
@@ -71,29 +59,8 @@ func integrationWithRemoteEntities(i *integration.Integration) {
 		panicOnErr(err)
 		m2.SetMetric("some-data", 2000, metric.GAUGE)
 	}
-}
 
-// This integration will show any data attached to the host where the agent is running
-func integrationWithLocalEntity(i *integration.Integration) {
-	localEntity := i.LocalEntity()
-
-	// Add Event
-	if args.All || args.Events {
-		localEntity.AddEvent(event.New("restart", "status"))
-	}
-
-	// Add Inventory item
-	if args.All || args.Inventory {
-		localEntity.SetInventoryItem("instance", "version", "3.0.1")
-	}
-
-	// Add Metric
-	if args.All || args.Metrics {
-		m, err := localEntity.NewMetricSet("CustomSample")
-		panicOnErr(err)
-
-		m.SetMetric("some-data", 4000, metric.GAUGE)
-	}
+	panicOnErr(i.Publish())
 }
 
 func panicOnErr(err error) {
