@@ -45,5 +45,8 @@ test: deps
 	@echo "=== $(INTEGRATION) === [ test ]: Running unit tests..."
 	@gocov test $(GO_PKGS) | gocov-xml > coverage.xml
 
+docker: all
+	@docker build -t {{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}-container .
+
 .PHONY: all build clean tools tools-update deps validate compile test
 

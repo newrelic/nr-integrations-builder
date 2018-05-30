@@ -51,6 +51,7 @@ var (
 		{"resource/tmpl/Makefile.tmpl", "Makefile", 0644},
 		{gometalinterPath, ".gometalinter.json", 0644},
 		{"resource/tmpl/vendor/vendor.json.tmpl", "vendor/vendor.json", 0644},
+		{"resource/tmpl/Dockerfile.tmpl", "Dockerfile", 0644},
 	}
 	localTemplates = []template{
 		{"resource/tmpl/src/integration_local.go.tmpl", "src/{{ .Name }}.go", 0644},

@@ -1,0 +1,13 @@
+FROM newrelic/infrastructure:latest
+
+# Agent config file (you should create this file, there is template here:
+# https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/configuration/infrastructure-config-file-template-newrelic-infrayml)
+# ADD newrelic-infra.yml /etc/newrelic-infra.yml
+
+# definition file
+ADD {{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}-definition.yml /var/db/newrelic-infra/custom-integrations/
+#config file
+ADD {{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}-config.yml /etc/newrelic-infra/integrations.d/
+# binary file
+ADD bin/{{ .Integration.CompanyPrefix }}-{{ .Integration.Name }} /usr/local/bin/{{ .Integration.CompanyPrefix }}-{{ .Integration.Name }}
+

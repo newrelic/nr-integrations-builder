@@ -32,6 +32,7 @@ func main() {
 	// Add Event
 	if args.All || args.Events {
 		e1.AddEvent(event.New("restart", "status"))
+		panicOnErr(err)
 	}
 
 	// Add Inventory item
@@ -58,6 +59,7 @@ func main() {
 		m2, err := e2.NewMetricSet("CustomSample")
 		panicOnErr(err)
 		m2.SetMetric("some-data", 2000, metric.GAUGE)
+		panicOnErr(err)
 	}
 
 	panicOnErr(i.Publish())
