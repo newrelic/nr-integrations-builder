@@ -28,17 +28,17 @@ func main() {
 	entity := i.LocalEntity()
 
 	// Add Event
-	if args.All() || args.Events {
+	if args.All || args.Events {
 		entity.AddEvent(event.New("restart", "status"))
 	}
 
 	// Add Inventory item
-	if args.All() || args.Inventory {
+	if args.All || args.Inventory {
 		entity.SetInventoryItem("instance", "version", "3.0.1")
 	}
 
 	// Add Metric
-	if args.All() || args.Metrics {
+	if args.All || args.Metrics {
 		m, err := entity.NewMetricSet("CustomSample")
 		panicOnErr(err)
 
