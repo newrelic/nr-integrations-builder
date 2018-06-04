@@ -36,12 +36,12 @@ func main() {
 	}
 
 	// Add Inventory item
-	if args.All || args.Inventory {
+	if args.All() || args.Inventory {
 		e1.SetInventoryItem("instance", "version", "3.0.1")
 	}
 
 	// Add Metric
-	if args.All || args.Metrics {
+	if args.All() || args.Metrics {
 		m1, err := e1.NewMetricSet("CustomSample")
 		panicOnErr(err)
 		m1.SetMetric("some-data", 1000, metric.GAUGE)
@@ -51,11 +51,11 @@ func main() {
 	e2, err := i.Entity("instance-2", "custom")
 	panicOnErr(err)
 
-	if args.All || args.Inventory {
+	if args.All() || args.Inventory {
 		e2.SetInventoryItem("instance", "version", "3.0.4")
 	}
 
-	if args.All || args.Metrics {
+	if args.All() || args.Metrics {
 		m2, err := e2.NewMetricSet("CustomSample")
 		panicOnErr(err)
 		err = m2.SetMetric("some-data", 2000, metric.GAUGE)
