@@ -30,7 +30,7 @@ func main() {
 	panicOnErr(err)
 
 	// Add Event
-	if args.All || args.Events {
+	if args.All() || args.Events {
 		err = e1.AddEvent(event.New("restart", "status"))
 		panicOnErr(err)
 	}

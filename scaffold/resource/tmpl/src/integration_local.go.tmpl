@@ -29,7 +29,7 @@ func main() {
 
 	// Add Event
 
-	if args.All || args.Events {
+	if args.All() || args.Events {
 		err = entity.AddEvent(event.New("restart", "status"))
 		panicOnErr(err)
 	}
