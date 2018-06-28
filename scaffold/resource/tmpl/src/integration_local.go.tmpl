@@ -29,12 +29,14 @@ func main() {
 
 	// Add Event
 	if args.All() || args.Events {
-		entity.AddEvent(event.New("restart", "status"))
+		err := entity.AddEvent(event.New("restart", "status"))
+		panicOnErr(err)
 	}
 
 	// Add Inventory item
 	if args.All() || args.Inventory {
-		entity.SetInventoryItem("instance", "version", "3.0.1")
+		err := entity.SetInventoryItem("instance", "version", "3.0.1")
+		panicOnErr(err)
 	}
 
 	// Add Metric
@@ -42,7 +44,8 @@ func main() {
 		m, err := entity.NewMetricSet("CustomSample")
 		panicOnErr(err)
 
-		m.SetMetric("some-data", 4000, metric.GAUGE)
+		err = m.SetMetric("some-data", 4000, metric.GAUGE)
+		panicOnErr(err)
 	}
 
 	panicOnErr(i.Publish())
