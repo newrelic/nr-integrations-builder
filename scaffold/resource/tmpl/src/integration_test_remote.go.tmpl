@@ -43,7 +43,7 @@ func TestMetrics(t *testing.T) {
 	m.SetMetric("testMetric2", "foo", metric.ATTRIBUTE)
 
 	metrics := m.Metrics
-	assert.Equal(t, 1, metrics["testMetric1"])
+	assert.Equal(t, float64(1), metrics["testMetric1"])
 	assert.Equal(t, "foo", metrics["testMetric2"])
 
 }
