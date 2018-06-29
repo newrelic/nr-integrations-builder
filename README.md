@@ -13,6 +13,10 @@ language.
 
 It is required to install [the Vendor Tool for Go](https://github.com/kardianos/govendor), which is used for managing dependencies. The project that you will create must be within a `$GOPATH/src`, otherwise the Vendor Tool won't work properly.
 
+#### Windows
+
+You need a bash environment (e.g. [Git bash for windows](https://git-scm.com/download/win)), with `make` and `awk` commands installed.
+
 ### Installation
 
 To install the command-line tool, use `go get`:
