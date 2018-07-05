@@ -3,6 +3,10 @@
 You can use this command-line tool to create and scaffold a new integration in
 Golang for [New Relic Integration Agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure).
 
+The generated code uses the [New Relic Infrastructure Integrations Go SDK](https://github.com/newrelic/infra-integrations-sdk).
+Please visit the [Go SDK documentation](https://github.com/newrelic/infra-integrations-sdk/blob/master/docs/README.md)
+for more information about its API and structure.
+
 ## Getting started
 
 ### Prerequisites
@@ -37,23 +41,82 @@ At this moment, there is only one command available: `init`. You can check the a
 ```bash
 $ nr-integrations-builder init --help
 ```
-It's obligatory to specify `company-name` and `company-prefix` flags. Otherwise, the `nr-integrations-builder` will not initialize the integration.
 
-This is an example of the usage:
+The available options are:
+
+  * `-n` or `--company-name` (string): company name (required).
+  * `-c` or `--company-prefix` (string): company prefix identifier (required).
+  * `-p` or `--destination-path` (string): the destination path were your integration will be generated as a subfolder
+    (default: current directory)
+  * `-e` or `--entity-type` (string): type of entity to generate (`remote` (default) or `local`). To know the differences
+    between `remote` or `local` entities, please refer to the [Entity definition section in the GoSDK v3 documents](https://github.com/newrelic/infra-integrations-sdk/blob/master/docs/entity-definition.md). 
+
+`company-name` and `company-prefix` flags must be specified. Otherwise, the `nr-integrations-builder` will not initialize the integration.
+
+Following command shows an usage example:
 
 ```bash
 $ nr-integrations-builder init \
-  --company-name "myorganization" \
-  --company-prefix "myorg" \
-  --destination-path "$GOPATH/src/myorg-integrations/" \
+  --company-name myorganization \
+  --company-prefix myorg \
+  --destination-path $GOPATH/src/myorg-integrations/ \
   mysql
 ```
 
-If you don't specify `destination-path` flag the current directory will be used.
 It is also possible to specify the flags in short form:
 ```bash
-nr-integrations-builder init mysql -n "myorganization" -c "myorg"
+nr-integrations-builder init mysql -n myorganization -c myorg -p $GOPATH/src/myorg-integrations/
 ```
+
+The above command would generate the next file structure in the `$GOPATH/src/myorg-integrations/` folder:
+
+```
+myorg-integrations
+└── mysql
+    ├── CHANGELOG.md
+    ├── LICENSE
+    ├── Makefile
+    ├── README.md
+    ├── myorg-mysql-config.yml
+    ├── myorg-mysql-config.yml.template
+    ├── myorg-mysql-definition.yml
+    ├── src
+    │   ├── mysql.go
+    │   └── mysql_test.go
+    └── vendor
+        ├── (...)
+        ├── (vendored third-party dependencies)
+        ├── (...)
+        └── vendor.json
+```
+
+The generated project will contain:
+
+* A `Makefile` with the basic commands to verify, build and test the integration code. Run `make all` to
+  generate an integration binary in the `bin/` subfolder.
+* An `src/` folder with the basic integration main and test file. The generated main file creates a dummy integration
+  with fake data.
+* Basic config and definition `.yml` files. Please refer to the [Integrations SDK documentation](https://docs.newrelic.com/docs/integrations/integrations-sdk/file-specifications)
+  for more information about configuration and description files.
+* `vendor` folder and `vendor/vendor.json` file with all the vendorized third-party libraries. Please refer to
+  [the Vendor Tool for Go](https://github.com/kardianos/govendor) for more information about how to install and use
+  Go Vendor.
+* Project description files: `README.md`, `CHANGELOG.md` and `LICENSE`
+
+### Installing your integration
+
+Taking as example the previously generated `mysql` sample, you must:
+
+1. Compile and build your integration binary file: `make all`
+2. In the Infrastructure Agent's host:
+    * Copy the `myorg-mysql-config.yml` into one of the following folders:
+        - Linux: `/etc/newrelic-infra/integrations.d`
+        - Windows: `C:\Program Files\New Relic\newrelic-infra\integrations.d`
+    * Copy the `myorg-mysql-definition.yml` file and the generated `bin/` folder (which contains the compiled
+       `myorg-mysql` integration binary) into one of the following folders:
+        - Linux: `/var/db/newrelic-infra/custom-integrations`
+        - Windows: `C:\Program Files\New Relic\newrelic-infra\custom-integrations`
+3. Restart the New Relic Infrastructure Agent service in the host where you installed the integration.       
 
 ## Contributing Code
 
