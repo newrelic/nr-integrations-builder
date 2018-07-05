@@ -67,9 +67,7 @@ func checkFlags(flags *pflag.FlagSet) error {
 		return fmt.Errorf("Wrong entity-type argument, valid values are: [remote, local]")
 	}
 
-	checkRequiredFlags(flags)
-
-	return nil
+	return checkRequiredFlags(flags)
 }
 
 func checkRequiredFlags(flags *pflag.FlagSet) error {
@@ -99,9 +97,9 @@ func init() {
 	RootCmd.AddCommand(initCmd)
 
 	initCmd.PersistentFlags().StringVarP(&icompanyPrefix, "company-prefix", "c", "", "Company prefix identifier (required)")
-	initCmd.MarkPersistentFlagRequired("company-prefix")
+	initCmd.MarkPersistentFlagRequired("company-prefix") // nolint: errcheck
 	initCmd.PersistentFlags().StringVarP(&icompanyName, "company-name", "n", "", "Company name (required)")
-	initCmd.MarkPersistentFlagRequired("company-name")
+	initCmd.MarkPersistentFlagRequired("company-name") // nolint: errcheck
 	initCmd.PersistentFlags().StringVarP(&idestinationPath, "destination-path", "p", "./", "Destination path for initialized integration")
 	initCmd.PersistentFlags().StringVarP(&entityType, "entity-type", "e", "remote", "Type of entity to generate: [remote,local] (required)")
 }
