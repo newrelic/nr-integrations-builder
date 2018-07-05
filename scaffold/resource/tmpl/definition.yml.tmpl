@@ -1,15 +1,26 @@
+# Copy this file (and the built 'bin' folder) into the following folder:
+#    Linux: /var/db/newrelic-infra/custom-integrations
+#    Windows: C:\Program Files\New Relic\newrelic-infra\custom-integrations
+#
+# For a complete description of the Definition File Specification, please
+# refer to the Integrations SDK documentation:
+# https://docs.newrelic.com/docs/integrations/integrations-sdk/file-specifications
+
 name: com.{{ .Integration.CompanyName }}.{{ .Integration.Name }}
 description: {{ .Integration.Description }}
 protocol_version: {{ .Integration.ProtocolVersion }}
 os: {{ .Integration.OS }}
 
 commands:
+  all_data:
+    command:
+      - ./bin/{{ .Integration.BinaryName }}
+    interval: {{ .Integration.Interval }}
   metrics:
     command:
       - ./bin/{{ .Integration.BinaryName }}
       - --metrics
     interval: {{ .Integration.Interval }}
-
   inventory:
     command:
       - ./bin/{{ .Integration.BinaryName }}
