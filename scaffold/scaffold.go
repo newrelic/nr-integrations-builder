@@ -45,7 +45,6 @@ var (
 	commonTemplates = []template{
 		{"resource/tmpl/README.md.tmpl", "README.md", 0644},
 		{"resource/tmpl/CHANGELOG.md.tmpl", "CHANGELOG.md", 0644},
-		{"resource/tmpl/LICENSE.tmpl", "LICENSE", 0644},
 		{"resource/tmpl/definition.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-definition.yml", 0644},
 		{"resource/tmpl/configuration.yml.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-config.yml", 0644},
 		{"resource/tmpl/configuration.yml.template.tmpl", "{{ .CompanyPrefix }}-{{ .Name }}-config.yml.template", 0644},
