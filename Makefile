@@ -6,9 +6,9 @@ GOTOOLS       = github.com/kardianos/govendor github.com/jteeuwen/go-bindata/...
 		github.com/kardianos/govendor \
 		gopkg.in/alecthomas/gometalinter.v2 \
 		github.com/axw/gocov/gocov \
-		github.com/AlekSi/gocov-xml \
+		github.com/AlekSi/gocov-xml
 
-all: clean validate test compile
+all: clean install validate test compile
 
 clean:
 	@echo "[ clean ]: removing binaries and coverage file..."
@@ -47,7 +47,8 @@ test: test-deps
 	@echo "[ test ]: running unit tests..."
 	@gocov test $(GO_PKGS) | gocov-xml > coverage.xml
 
-install:
-	@echo "TODO"
+install: tools
+	@echo "[ install ]: installing..."
+	@go get $(GO_PKGS)
 
 .PHONY: all clean validate-deps validate generate tools compile test-deps test install
