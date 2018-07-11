@@ -41,8 +41,7 @@ func main() {
 
 	// Add Metric
 	if args.All() || args.Metrics {
-		m, err := entity.NewMetricSet("CustomSample")
-		panicOnErr(err)
+		m := entity.NewMetricSet("CustomSample")
 
 		err = m.SetMetric("some-data", 4000, metric.GAUGE)
 		panicOnErr(err)

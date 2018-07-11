@@ -1,76 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"testing"
 
-	"github.com/newrelic/infra-integrations-sdk/data/event"
-	"github.com/newrelic/infra-integrations-sdk/data/metric"
-	"github.com/newrelic/infra-integrations-sdk/integration"
-	"github.com/stretchr/testify/assert"
 )
 
-func TestEvent(t *testing.T) {
-	// Insert here the logic for your tests
-
-	i, err := integration.New("test", "1.0.0")
-	assert.NoError(t, err)
-
-	e, err := i.Entity("testEntity", "testNamespace")
-	assert.NoError(t, err)
-
-	e.AddEvent(event.New("testSummary", "testCategory"))
-
-	assert.Equal(t, e.Events[0].Summary, "testSummary")
-	assert.Equal(t, e.Events[0].Category, "testCategory")
-	assert.Equal(t, 1, len(e.Events))
-
-}
-
-func TestMetrics(t *testing.T) {
-	// Insert here the logic for your tests
-
-	i, err := integration.New("test", "1.0.0")
-	assert.NoError(t, err)
-
-	e, err := i.Entity("testEntity", "testNamespace")
-	assert.NoError(t, err)
-
-	m, err := e.NewMetricSet("testMetrics")
-	assert.NoError(t, err)
-
-	m.SetMetric("testMetric1", 1, metric.GAUGE)
-	m.SetMetric("testMetric2", "foo", metric.ATTRIBUTE)
-
-	metrics := m.Metrics
-	assert.Equal(t, float64(1), metrics["testMetric1"])
-	assert.Equal(t, "foo", metrics["testMetric2"])
-
-}
-
-func TestCreateLocalEntity(t *testing.T) {
-	i, err := integration.New("test", "1.0.0")
-	assert.NoError(t, err)
-
-	i.LocalEntity()
-	j, err := json.Marshal(i)
-
-	assert.Equal(t, `{"name":"test","protocol_version":"2","integration_version":"1.0.0","data":[{"metrics":[],"inventory":{},"events":[]}]}`, string(j))
-
-}
-
-func TestCreateLocalEntityWithInventory(t *testing.T) {
-	i, err := integration.New("test", "1.0.0")
-	assert.NoError(t, err)
-
-	e := i.LocalEntity()
-
-	e.Inventory.SetItem("foo", "bar", "quux")
-
-	ii, exists := e.Inventory.Item("foo")
-	assert.Equal(t, exists, true)
-	assert.Equal(t, "quux", ii["bar"])
-
-	assert.Equal(t, len(e.Inventory.Items()), 1)
-
+// Insert here the logic for your tests
+func TestPlaceholder(t *testing.T) {
+	t.Skipped()
 }
