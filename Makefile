@@ -48,7 +48,7 @@ test: test-deps
 	@gocov test $(GO_PKGS) | gocov-xml > coverage.xml
 
 deps: tools
-	@echo "[ install ]: installing..."
+	@echo "[ deps ]: installing dependencies..."
 	@go get $(GO_PKGS)
 
 .PHONY: all clean validate-deps validate generate tools compile test-deps test deps
