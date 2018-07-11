@@ -74,7 +74,6 @@ The above command would generate the next file structure in the `$GOPATH/src/myo
 myorg-integrations
 └── mysql
     ├── CHANGELOG.md
-    ├── LICENSE
     ├── Makefile
     ├── README.md
     ├── myorg-mysql-config.yml
@@ -101,7 +100,7 @@ The generated project will contain:
 * `vendor` folder and `vendor/vendor.json` file with all the vendorized third-party libraries. Please refer to
   [the Vendor Tool for Go](https://github.com/kardianos/govendor) for more information about how to install and use
   Go Vendor.
-* Project description files: `README.md`, `CHANGELOG.md` and `LICENSE`
+* Project description files: `README.md` and `CHANGELOG.md`
 
 ### Installing your integration
 

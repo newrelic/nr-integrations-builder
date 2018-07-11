@@ -2,7 +2,6 @@
 // sources:
 // resource/tmpl/.gometalinter.json.tmpl
 // resource/tmpl/CHANGELOG.md.tmpl
-// resource/tmpl/LICENSE.tmpl
 // resource/tmpl/Makefile.tmpl
 // resource/tmpl/README.md.tmpl
 // resource/tmpl/configuration.yml.template.tmpl
@@ -116,26 +115,6 @@ func resourceTmplChangelogMdTmpl() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "resource/tmpl/CHANGELOG.md.tmpl", size: 374, mode: os.FileMode(420), modTime: time.Unix(1521630392, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _resourceTmplLicenseTmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x0a\xf1\x77\xf1\xb7\x52\xf0\xcc\x4b\xce\x29\x4d\x49\x55\x48\x54\xc8\xc9\x4c\x4e\xcd\x2b\x4e\xd5\x03\x04\x00\x00\xff\xff\xe9\xb7\xf2\x07\x18\x00\x00\x00")
-
-func resourceTmplLicenseTmplBytes() ([]byte, error) {
-	return bindataRead(
-		_resourceTmplLicenseTmpl,
-		"resource/tmpl/LICENSE.tmpl",
-	)
-}
-
-func resourceTmplLicenseTmpl() (*asset, error) {
-	bytes, err := resourceTmplLicenseTmplBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "resource/tmpl/LICENSE.tmpl", size: 24, mode: os.FileMode(420), modTime: time.Unix(1521630392, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -280,7 +259,7 @@ func resourceTmplSrcIntegration_remoteGoTmpl() (*asset, error) {
 	return a, nil
 }
 
-var _resourceTmplSrcIntegration_test_localGoTmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2c\xcc\x41\x0a\x83\x30\x10\x05\xd0\xb5\xff\x14\x1f\x57\xda\x85\x9e\xa3\xbb\x42\xbd\x40\x88\xa3\x09\xc6\x24\x4c\xc6\x45\x29\xbd\x7b\x29\x74\xff\x78\xd5\xf9\xc3\xed\xc2\xd3\xc5\x0c\xc4\xb3\x16\x35\x0e\xe8\x7a\x93\x66\x31\xef\x3d\x30\x02\xf3\xcc\x7b\x6e\xa2\xc6\x20\x2a\xb4\x20\x4c\x65\x8f\x9e\x5b\x51\xbe\xca\xa5\xfc\xf1\x86\xed\xca\x9e\x8b\x34\x7b\x24\xe7\x25\x94\xb4\x8a\x0e\xc6\xdb\x3f\x9b\x96\x91\x6f\x74\x36\x3d\x8f\x58\xab\xac\xc3\x88\x0f\xbe\x01\x00\x00\xff\xff\x3f\x06\x5b\xc9\x82\x00\x00\x00")
+var _resourceTmplSrcIntegration_test_localGoTmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2c\xcc\x41\x0a\x83\x30\x10\x05\xd0\xb5\x73\x8a\x8f\x2b\xd3\x85\x9e\xa3\xbb\x42\xbd\x40\x88\x63\x12\x8c\x99\x30\x19\x17\xa5\xf4\xee\xa5\xd0\xfd\xe3\x35\x1f\x0e\x1f\x19\xa7\xcf\x95\x28\x9f\x4d\xd4\x30\xd1\x30\x1a\x77\xcb\x35\x8e\xe4\x88\x96\x05\xf7\xda\x59\x0d\x89\x95\x61\x89\x51\x24\xe6\x80\x5d\x14\x2f\xb9\x14\x3f\xdd\x69\xbf\x6a\xc0\xca\xdd\x1e\xc5\x07\x4e\x52\x36\xd6\xc9\x70\xfb\x5f\xf3\xea\xf0\xa6\xc1\xe6\xe7\x91\x5b\xe3\x6d\x72\xf4\xa1\x6f\x00\x00\x00\xff\xff\xda\x28\x22\x33\x81\x00\x00\x00")
 
 func resourceTmplSrcIntegration_test_localGoTmplBytes() ([]byte, error) {
 	return bindataRead(
@@ -295,12 +274,12 @@ func resourceTmplSrcIntegration_test_localGoTmpl() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "resource/tmpl/src/integration_test_local.go.tmpl", size: 130, mode: os.FileMode(420), modTime: time.Unix(1531320471, 0)}
+	info := bindataFileInfo{name: "resource/tmpl/src/integration_test_local.go.tmpl", size: 129, mode: os.FileMode(420), modTime: time.Unix(1531321482, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
-var _resourceTmplSrcIntegration_test_remoteGoTmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2c\xcc\x41\x0a\x83\x30\x10\x05\xd0\xb5\xff\x14\x1f\x57\xda\x85\x9e\xa3\xbb\x42\xbd\x40\x88\xa3\x09\xc6\x24\x4c\xc6\x45\x29\xbd\x7b\x29\x74\xff\x78\xd5\xf9\xc3\xed\xc2\xd3\xc5\x0c\xc4\xb3\x16\x35\x0e\xe8\x7a\x93\x66\x31\xef\x3d\x30\x02\xf3\xcc\x7b\x6e\xa2\xc6\x20\x2a\xb4\x20\x4c\x65\x8f\x9e\x5b\x51\xbe\xca\xa5\xfc\xf1\x86\xed\xca\x9e\x8b\x34\x7b\x24\xe7\x25\x94\xb4\x8a\x0e\xc6\xdb\x3f\x9b\x96\x91\x6f\x74\x36\x3d\x8f\x58\xab\xac\xc3\x88\x0f\xbe\x01\x00\x00\xff\xff\x3f\x06\x5b\xc9\x82\x00\x00\x00")
+var _resourceTmplSrcIntegration_test_remoteGoTmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2c\xcc\x41\x0a\x83\x30\x10\x05\xd0\xb5\x73\x8a\x8f\x2b\xd3\x85\x9e\xa3\xbb\x42\xbd\x40\x88\x63\x12\x8c\x99\x30\x19\x17\xa5\xf4\xee\xa5\xd0\xfd\xe3\x35\x1f\x0e\x1f\x19\xa7\xcf\x95\x28\x9f\x4d\xd4\x30\xd1\x30\x1a\x77\xcb\x35\x8e\xe4\x88\x96\x05\xf7\xda\x59\x0d\x89\x95\x61\x89\x51\x24\xe6\x80\x5d\x14\x2f\xb9\x14\x3f\xdd\x69\xbf\x6a\xc0\xca\xdd\x1e\xc5\x07\x4e\x52\x36\xd6\xc9\x70\xfb\x5f\xf3\xea\xf0\xa6\xc1\xe6\xe7\x91\x5b\xe3\x6d\x72\xf4\xa1\x6f\x00\x00\x00\xff\xff\xda\x28\x22\x33\x81\x00\x00\x00")
 
 func resourceTmplSrcIntegration_test_remoteGoTmplBytes() ([]byte, error) {
 	return bindataRead(
@@ -315,7 +294,7 @@ func resourceTmplSrcIntegration_test_remoteGoTmpl() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "resource/tmpl/src/integration_test_remote.go.tmpl", size: 130, mode: os.FileMode(420), modTime: time.Unix(1531320471, 0)}
+	info := bindataFileInfo{name: "resource/tmpl/src/integration_test_remote.go.tmpl", size: 129, mode: os.FileMode(420), modTime: time.Unix(1531321482, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -394,7 +373,6 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){
 	"resource/tmpl/.gometalinter.json.tmpl": resourceTmplGometalinterJsonTmpl,
 	"resource/tmpl/CHANGELOG.md.tmpl": resourceTmplChangelogMdTmpl,
-	"resource/tmpl/LICENSE.tmpl": resourceTmplLicenseTmpl,
 	"resource/tmpl/Makefile.tmpl": resourceTmplMakefileTmpl,
 	"resource/tmpl/README.md.tmpl": resourceTmplReadmeMdTmpl,
 	"resource/tmpl/configuration.yml.template.tmpl": resourceTmplConfigurationYmlTemplateTmpl,
@@ -451,7 +429,6 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"tmpl": &bintree{nil, map[string]*bintree{
 			".gometalinter.json.tmpl": &bintree{resourceTmplGometalinterJsonTmpl, map[string]*bintree{}},
 			"CHANGELOG.md.tmpl": &bintree{resourceTmplChangelogMdTmpl, map[string]*bintree{}},
-			"LICENSE.tmpl": &bintree{resourceTmplLicenseTmpl, map[string]*bintree{}},
 			"Makefile.tmpl": &bintree{resourceTmplMakefileTmpl, map[string]*bintree{}},
 			"README.md.tmpl": &bintree{resourceTmplReadmeMdTmpl, map[string]*bintree{}},
 			"configuration.yml.template.tmpl": &bintree{resourceTmplConfigurationYmlTemplateTmpl, map[string]*bintree{}},
