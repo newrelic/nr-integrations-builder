@@ -27,9 +27,9 @@ func main() {
 	// Create Integration
 	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
 	if err != nil {
-    		log.Error(err.Error())
-    		os.Exit(1)
-    }
+		log.Error(err.Error())
+		os.Exit(1)
+	}
 
 	// Create Entity, entities name must be unique
 	e1, err := i.Entity("instance-1", "custom")
