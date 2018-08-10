@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	sdkArgs "github.com/newrelic/infra-integrations-sdk/args"
 	"github.com/newrelic/infra-integrations-sdk/data/event"
 	"github.com/newrelic/infra-integrations-sdk/data/metric"
@@ -24,52 +26,66 @@ var (
 func main() {
 	// Create Integration
 	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
-	logOnError(err)
+	if err != nil {
+    		log.Error(err.Error())
+    		os.Exit(1)
+    }
 
 	// Create Entity, entities name must be unique
 	e1, err := i.Entity("instance-1", "custom")
-	logOnError(err)
+	if err != nil {
+		log.Error(err.Error())
+		os.Exit(1)
+	}
 
 	// Add Event
 	if args.All() || args.Events {
 		err = e1.AddEvent(event.New("restart", "status"))
-		logOnError(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
 	// Add Inventory item
 	if args.All() || args.Inventory {
 		err = e1.SetInventoryItem("instance", "version", "3.0.1")
-		logOnError(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
 	// Add Metric
 	if args.All() || args.Metrics {
 		m1 := e1.NewMetricSet("CustomSample")
 		err = m1.SetMetric("some-data", 1000, metric.GAUGE)
-		logOnError(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
 	// Create another Entity
 	e2, err := i.Entity("instance-2", "custom")
-	logOnError(err)
+	if err != nil {
+		log.Error(err.Error())
+		os.Exit(1)
+	}
 
 	if args.All() || args.Inventory {
 		err = e2.SetInventoryItem("instance", "version", "3.0.4")
-		logOnError(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
 	if args.All() || args.Metrics {
 		m2 := e2.NewMetricSet("CustomSample")
 		err = m2.SetMetric("some-data", 2000, metric.GAUGE)
-		logOnError(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
-	logOnError(i.Publish())
-}
-
-func logOnError(err error) {
-	if err != nil {
-		log := log.NewStdErr(true)
-		log.Errorf("%s", err)
+	if err = i.Publish(); err != nil {
+		log.Error(err.Error())
 	}
 }

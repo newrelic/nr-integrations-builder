@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	sdkArgs "github.com/newrelic/infra-integrations-sdk/args"
 	"github.com/newrelic/infra-integrations-sdk/data/event"
 	"github.com/newrelic/infra-integrations-sdk/data/metric"
@@ -24,20 +26,27 @@ var (
 func main() {
 	// Create Integration
 	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
-	logOnError(err)
+    if err != nil {
+    		log.Error(err.Error())
+    		os.Exit(1)
+    }
 
 	entity := i.LocalEntity()
 
 	// Add Event
 	if args.All() || args.Events {
 		err = entity.AddEvent(event.New("restart", "status"))
-		logOnError(err)
+		if err != nil {
+        			log.Error(err.Error())
+        }
 	}
 
 	// Add Inventory item
 	if args.All() || args.Inventory {
 		err = entity.SetInventoryItem("instance", "version", "3.0.1")
-		logOnError(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
 	// Add Metric
@@ -45,15 +54,12 @@ func main() {
 		m := entity.NewMetricSet("CustomSample")
 
 		err = m.SetMetric("some-data", 4000, metric.GAUGE)
-		logOnError(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
-	logOnError(i.Publish())
-}
-
-func logOnError(err error) {
-	if err != nil {
-		log := log.NewStdErr(true)
-		log.Errorf("%s", err)
+	if err = i.Publish(); err != nil {
+		log.Error(err.Error())
 	}
 }
