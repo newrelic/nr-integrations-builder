@@ -1,10 +1,13 @@
 package main
 
 import (
+	"os"
+
 	sdkArgs "github.com/newrelic/infra-integrations-sdk/args"
 	"github.com/newrelic/infra-integrations-sdk/data/event"
 	"github.com/newrelic/infra-integrations-sdk/data/metric"
 	"github.com/newrelic/infra-integrations-sdk/integration"
+	"github.com/newrelic/infra-integrations-sdk/log"
 )
 
 type argumentList struct {
@@ -23,20 +26,27 @@ var (
 func main() {
 	// Create Integration
 	i, err := integration.New(integrationName, integrationVersion, integration.Args(&args))
-	panicOnErr(err)
+	if err != nil {
+		log.Error(err.Error())
+		os.Exit(1)
+	}
 
 	entity := i.LocalEntity()
 
 	// Add Event
 	if args.All() || args.Events {
 		err = entity.AddEvent(event.New("restart", "status"))
-		panicOnErr(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
 	// Add Inventory item
 	if args.All() || args.Inventory {
 		err = entity.SetInventoryItem("instance", "version", "3.0.1")
-		panicOnErr(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
 	// Add Metric
@@ -44,14 +54,12 @@ func main() {
 		m := entity.NewMetricSet("CustomSample")
 
 		err = m.SetMetric("some-data", 4000, metric.GAUGE)
-		panicOnErr(err)
+		if err != nil {
+			log.Error(err.Error())
+		}
 	}
 
-	panicOnErr(i.Publish())
-}
-
-func panicOnErr(err error) {
-	if err != nil {
-		panic(err)
+	if err = i.Publish(); err != nil {
+		log.Error(err.Error())
 	}
 }
