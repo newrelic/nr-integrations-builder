@@ -144,28 +144,17 @@ functionality (e.g. a performance optimization) and new tests are not required.
 In general, including tests with your pull request dramatically increases the
 chances it will be accepted.
 
+## Support
 
-## Contributing Code
+New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
 
-We welcome code contributions (in the form of pull requests) from our user
-community.  Before submitting a pull request please review
-[these guidelines](https://github.com/newrelic/nr-integrations-builder/blob/master/CONTRIBUTING.md).
+https://discuss.newrelic.com/c/support-products-agents/new-relic-infrastructure
 
-Following these helps us efficiently review and incorporate your contribution
-and avoid breaking your code with future changes to the agent.
+## Contributing
+We encourage your contributions to improve [project name]! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project.
+If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company,  please drop us an email at opensource@newrelic.com.
 
 IMPORTANT: Never edit manually the `scaffold/bindata.go file`. This must be generated using `make generate`
 
-## Support
-
-You can find more detailed documentation [on our website](http://newrelic.com/docs),
-and specifically in the [Infrastructure category](https://docs.newrelic.com/docs/infrastructure).
-
-If you can't find what you're looking for there, reach out to us on our [support
-site](http://support.newrelic.com/) or our [community forum](http://forum.newrelic.com)
-and we'll be happy to help you.
-
-Find a bug? Contact us via [support.newrelic.com](http://support.newrelic.com/),
-or email support@newrelic.com.
-
-New Relic, Inc.
+## License
+[Project Name] is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
