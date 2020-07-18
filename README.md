@@ -1,29 +1,30 @@
-# New Relic Infrastructure Integrations builder
+[![Community Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
+
+# New Relic infrastructure integrations builder
 
 You can use this command-line tool to create and scaffold a new integration in
-Golang for [New Relic Integration Agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure).
+Golang for the [New Relic infrastructure agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure).
 
-The generated code uses the [New Relic Infrastructure Integrations Go SDK](https://github.com/newrelic/infra-integrations-sdk).
-Please visit the [Go SDK documentation](https://github.com/newrelic/infra-integrations-sdk/blob/master/docs/README.md)
+The generated code uses the [New Relic infrastructure integrations go SDK](https://github.com/newrelic/infra-integrations-sdk).
+Please visit the [go SDK documentation](https://github.com/newrelic/infra-integrations-sdk/blob/master/docs/README.md)
 for more information about its API and structure.
-
-## Getting started
-
-### Prerequisites
 
 Before starting to write Go code, we suggest taking a look at Golang's
 documentation to setup the environment and familiarize yourself with Golang
 language.
+
+## Installing
+
+### Prerequisites
 
 It is required to install [the Vendor Tool for Go](https://github.com/kardianos/govendor), which is used for managing dependencies. The project that you will create must be within a `$GOPATH/src`, otherwise the Vendor Tool won't work properly.
 
 #### Windows
 
 You need a bash environment (e.g. [Git bash for windows](https://git-scm.com/download/win)), with `make` and `awk` commands installed.
+To install the command-line tool, use `go get`:
 
 ### Installation
-
-To install the command-line tool, use `go get`:
 
 ```bash
 $ go get github.com/newrelic/nr-integrations-builder
@@ -49,11 +50,11 @@ The available options are:
   * `-p` or `--destination-path` (string): the destination path were your integration will be generated as a subfolder
     (default: current directory)
   * `-e` or `--entity-type` (string): type of entity to generate (`remote` (default) or `local`). To know the differences
-    between `remote` or `local` entities, please refer to the [Entity definition section in the GoSDK v3 documents](https://github.com/newrelic/infra-integrations-sdk/blob/master/docs/entity-definition.md). 
+    between `remote` or `local` entities, please refer to the [Entity definition section in the GoSDK v3 documents](https://github.com/newrelic/infra-integrations-sdk/blob/master/docs/entity-definition.md).
 
 `company-name` and `company-prefix` flags must be specified. Otherwise, the `nr-integrations-builder` will not initialize the integration.
 
-Following command shows an usage example:
+Following command shows an example of how to use the tool:
 
 ```bash
 $ nr-integrations-builder init \
@@ -116,6 +117,33 @@ Taking as example the previously generated `mysql` sample, you must:
         - Linux: `/var/db/newrelic-infra/custom-integrations`
         - Windows: `C:\Program Files\New Relic\newrelic-infra\custom-integrations`
 3. Restart the New Relic Infrastructure Agent service in the host where you installed the integration.       
+
+## Testing
+
+The command-line tool includes a suite of unit tests with each package which
+should be used to verify your changes don't break existing functionality.
+
+### Running Tests
+
+Running the test suite is simple.  Just invoke:
+
+```bash
+$ make test
+```
+
+### Writing Tests
+
+For most contributions it is strongly recommended to add additional tests which
+exercise your changes.
+
+This helps us efficiently incorporate your changes into our mainline codebase
+and provides a safeguard that your change won't be broken by future development.
+
+There are some rare cases where code changes do not result in changed
+functionality (e.g. a performance optimization) and new tests are not required.
+In general, including tests with your pull request dramatically increases the
+chances it will be accepted.
+
 
 ## Contributing Code
 
