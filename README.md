@@ -1,5 +1,7 @@
 [![Community Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
 
+>⚠️ The infrastructure integrations builder is no longer actively maintained. New Relic will keep this cli-tool for internal use only. Please consider using [New Relic Flex](https://docs.newrelic.com/docs/integrations/host-integrations/host-integrations-list/flex-integration-tool-build-your-own-integration/) and/or open source instrumentation depending on your use cases. 
+
 # New Relic infrastructure integrations builder
 
 You can use this command-line tool to create and scaffold a new integration in Golang for the [New Relic infrastructure agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure). 
